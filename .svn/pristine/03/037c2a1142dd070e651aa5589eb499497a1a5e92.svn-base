@@ -1,0 +1,66 @@
+package com.rms.controller;
+
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.rms.ScheduledClass;
+import com.rms.comman.CommonConstants;
+import com.rms.model.MstPatientDetails;
+import com.rms.model.RequestVO;
+import com.rms.service.IPatientEMRData;
+/**
+ * @author Susheel.Kumar
+ *
+ */
+
+@RestController
+@RequestMapping(CommonConstants.MASTER_URL)
+public class EMRPatientDataController {
+	@Autowired
+	IPatientEMRData PatientEMRData;
+	 
+	@RequestMapping(value=CommonConstants.GET_PATIENT_DATA_FROM_EMR, method= RequestMethod.POST)
+	public List<MstPatientDetails> getPatHistory(@PathVariable("provider") String provider,@PathVariable("clientId") String clientId,@PathVariable("apptDate") String apptDate
+			,@PathVariable("flag") String flag	) {
+		
+	     RequestVO requestVO=new RequestVO();
+	     requestVO.setClientId(clientId);
+	     requestVO.setProvider(provider);
+	     requestVO.setApptDate(apptDate);
+	     requestVO.setFlag(flag);
+	     
+		final String URL_PatientData =CommonConstants.URL;
+		 
+		HttpEntity<RequestVO> httpEntity = new HttpEntity<RequestVO>(requestVO);
+		 
+		 RestTemplate restTemplate = new RestTemplate();
+		 ResponseEntity<List<MstPatientDetails>> response = restTemplate.exchange( URL_PatientData, HttpMethod.POST, httpEntity,
+		   new ParameterizedTypeReference<List<MstPatientDetails>>(){});
+		 List<MstPatientDetails> historyList = response.getBody();
+		
+		return PatientEMRData.getPatHistory(historyList);
+		 //https://www.baeldung.com/spring-rest-template-list
+        }
+
+	  
+	  
+	    
+	  
+	  
+	
+	
+     }

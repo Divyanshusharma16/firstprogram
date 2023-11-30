@@ -1,0 +1,42 @@
+package com.rms.serviceImpl;
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rms.dao.UserServeyDetailsRepository;
+import com.rms.model.UserServeyDetailsModel;
+import com.rms.service.IUserServeyDetalis;
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+
+@Service
+public class UserServeyDetailsImpl implements IUserServeyDetalis{
+
+	@Autowired
+	UserServeyDetailsRepository userServeyDetailsRepository;
+
+	@Override
+	public UserServeyDetailsModel userServeyDetail(UserServeyDetailsModel userServeyDetailsModel) {
+		// TODO Auto-generated method stub
+		return userServeyDetailsRepository.save(userServeyDetailsModel);
+	}	
+	
+	UserServeyDetailsModel userServeyDetailsModel= new UserServeyDetailsModel();
+
+	@Override
+	public UserServeyDetailsModel userServeyReport(UserServeyDetailsModel userServeyDetailsModel) {
+		// TODO Auto-generated method stub
+		return userServeyDetailsRepository.findByaddonDateTime(userServeyDetailsModel.getAddonDateTime());
+	}
+	
+	}
+
+	
+
+		

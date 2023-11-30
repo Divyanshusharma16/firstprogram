@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.springboot.rmsystem</groupId>
+	<artifactId>rmsystem</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>rmsystem Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- Spring boot parent dependency jar -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.1.RELEASE</version>
+	</parent>
+	
+  
+	<dependencies>
+		<!-- Spring boot web mvc jar -->
+		<!-- Automatically adds tomcat and jackson-databind jars -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- Spring boot jpa jar -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- Mysql database jar -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+  <groupId>com.twilio.sdk</groupId>
+  <artifactId>twilio</artifactId>
+  <version>7.22.2</version>
+</dependency>
+
+<dependency>
+    <groupId>com.twilio.sdk</groupId>
+    <artifactId>twilio-java-sdk</artifactId>
+    <version>7.0.0-rc-7</version>
+</dependency>
+<dependency>
+  <groupId>com.sendgrid</groupId>
+  <artifactId>sendgrid-java</artifactId>
+  <version>4.2.1</version>
+</dependency>
+<dependency>
+  <groupId>com.sendgrid</groupId>
+  <artifactId>sendgrid-java</artifactId>
+  <version>4.0.0</version>
+</dependency>
+ 
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
+
+<dependency>
+			<groupId>net.iharder</groupId>
+			<artifactId>base64</artifactId>
+			<version>2.3.8</version>
+		</dependency>
+
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.9</version>
+</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>rmsystem</finalName>
+	</build>
+	
+	
+	
+</project>

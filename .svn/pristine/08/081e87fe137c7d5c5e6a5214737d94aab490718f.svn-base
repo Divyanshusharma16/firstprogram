@@ -1,0 +1,15 @@
+
+CREATE DATABASE rms;
+USE rms;
+
+CREATE TABLE mstlogin(
+	id INT(10) NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50) NOT NULL,
+	userpassword VARCHAR(50) NOT NULL,
+	PRIMARY KEY (id)
+);
+INSERT INTO mstlogin VALUES ('ABCEF', '12345','KMG');
+
+
+
+

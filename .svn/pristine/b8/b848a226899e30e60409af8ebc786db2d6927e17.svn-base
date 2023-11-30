@@ -1,0 +1,108 @@
+package com.rms.model;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+
+@Component
+// Spring jpa jars.
+@Entity
+@Table(name= "mstlogin")
+
+// To increase speed and save sql statement execution time.
+@DynamicInsert
+@DynamicUpdate
+public class UserLogin {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(name="username")
+	private String username;
+	
+	
+
+
+
+	@Column(name="userpassword")
+	private String userpassword;
+	
+	@Column(name="facility")
+	private String facility;
+	
+	
+	public UserLogin() { }
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getUserpassword() {
+		return userpassword;
+	}
+
+
+	public void setUserpassword(String userpassword) {
+		this.userpassword = userpassword;
+	}
+
+
+	public String getFacility() {
+		return facility;
+	}
+
+	public void setFacility(String facility) {
+		this.facility = facility;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UserLogin [id=" + id + ", userName=" + username + ", userPassword=" + userpassword +", facility=" + facility +"]";
+	}
+
+
+	
+
+
+
+	
+
+
+
+
+
+
+}
+	 

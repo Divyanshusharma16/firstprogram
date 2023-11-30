@@ -1,0 +1,31 @@
+package com.rms.comman;
+
+
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+public final class CommonConstants {
+	
+	public static final String MASTER_URL = "/rms";
+	
+	public static final String LOGIN_REGISTRATION = "/addLogin";
+	public static final String GET_FACILITY ="/getFacility";
+	public static final String GET_LOGIN = "/getLogin";
+	public static final String SEND_SMS ="/sendSMS";
+	public static final String SEND_SMS_AND_EMAIL ="/sendBulgSmsAndEmail";
+	
+	
+	 final public static String MEDPRIME_APPLICATION_PROPERTIES = "Properties.Application";
+     public static final String GET_PATIENT_DATA_FROM_EMR = "getPatientEveryDayDataFromEMR";
+     public static final String URL ="http://kmg-015:9080/EMRSystem/schedulers/getEveryDayUserData";
+
+	
+	
+}
+
+
+
+
+	

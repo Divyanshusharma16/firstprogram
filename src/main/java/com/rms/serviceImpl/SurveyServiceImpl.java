@@ -1,0 +1,27 @@
+/**
+ * 
+ */
+package com.rms.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.rms.dao.SurveyDataRepository;
+import com.rms.model.MstSurveyVO;
+import com.rms.service.ISurvey;
+
+/**
+ * @author shiva.theja
+ *
+ */
+public class SurveyServiceImpl implements ISurvey{
+
+	@Autowired
+	SurveyDataRepository repository;
+	@Override
+	public MstSurveyVO creatMstQ(MstSurveyVO MstSurveyVO) {
+		MstSurveyVO.setAddedby("SYS");
+		
+		return repository.save(MstSurveyVO);
+	}
+
+}

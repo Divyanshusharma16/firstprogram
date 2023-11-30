@@ -1,0 +1,72 @@
+package com.rms.controller;
+
+
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rms.comman.CommonConstants;
+import com.rms.model.FacilityVO;
+import com.rms.model.MstPatientDetails;
+import com.rms.model.SendSmsAndSendEmailVO;
+import com.rms.model.UserLogin;
+import com.rms.service.IFacilityService;
+import com.rms.service.IPatientEMRData;
+import com.rms.service.IUserService;
+
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+@RestController
+@RequestMapping(CommonConstants.MASTER_URL)
+public class RmsUserController {
+
+	@Autowired
+	IUserService service;
+	
+	@Autowired
+	IFacilityService iFacilityService;
+	
+	@Autowired
+	IPatientEMRData PatientEMRData;
+	
+	@RequestMapping(value=CommonConstants.LOGIN_REGISTRATION, method= RequestMethod.POST)
+	public UserLogin createUserLogin(@RequestBody UserLogin userLogin) {
+		return service.createUserLogin(userLogin);
+	}
+		
+	@RequestMapping(value=CommonConstants.GET_FACILITY, method= RequestMethod.GET)
+	public List<FacilityVO> getFacility() {
+		return iFacilityService.getFacility();
+	}
+
+	
+	@RequestMapping(value=CommonConstants.GET_LOGIN, method= RequestMethod.POST)
+	public List<UserLogin> findByusernameAnduserpassword(@RequestBody UserLogin userLogin) {
+		return service.findByusernameAnduserpassword(userLogin);
+	}
+	
+
+	/*@RequestMapping(value= CommonConstants.SEND_SMS, method= RequestMethod.POST)
+	public boolean sendSmsToUser( @RequestBody SendSmsAndSendEmailVO sendSmsAndSendEmailVO) {
+		return service.sendSmsToUser(sendSmsAndSendEmailVO);
+	}*/
+	//@RequestBody MstPatientDetails mstPatientDetails
+	@RequestMapping(value= CommonConstants.SEND_SMS_AND_EMAIL, method= RequestMethod.POST)
+	public List<MstPatientDetails> sendSmsAndEmailToUser(@PathVariable("checkOutTime") String checkOutTime )throws Exception {
+		MstPatientDetails mstPatientDetails=new MstPatientDetails();
+		mstPatientDetails.setCheckOutTime(checkOutTime);
+		return PatientEMRData.sendSmsAndEmailToUser(mstPatientDetails);
+	}
+	
+	
+}

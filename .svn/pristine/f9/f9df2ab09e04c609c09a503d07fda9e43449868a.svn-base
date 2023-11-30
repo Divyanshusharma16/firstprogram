@@ -1,0 +1,126 @@
+package com.rms.model;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.stereotype.Component;
+
+
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+
+@Component
+// Spring jpa jars.
+@Entity
+@Table(name= "usersurveydetails")
+
+// To increase speed and save sql statement execution time.
+@DynamicInsert
+@DynamicUpdate
+//@Getter @Setter
+// @Getter @Setter(AccessLevel.PUBLIC)
+public class UserServeyDetailsModel {
+ @Id
+ @GeneratedValue(strategy=GenerationType.IDENTITY)
+ @Column(name="USERSURVEYID")	
+ private int userSurveyId;
+
+  //private int userSurveyId;*/
+   @Column(name="USERNAME")	
+   private String userName;
+  @Column(name="USERID")
+     private String userId;
+  @Column(name="USERSCORE")
+  private String userScore;
+  @Column(name="USERDATA",columnDefinition="blob")
+  private String userData;
+  @Column(name = "ADDEDONDATETIME", columnDefinition = "DATETIME")
+	private String addonDateTime;
+
+ @Column(name = "MODIFIEDONDATETIME", columnDefinition = "DATETIME")
+	private String modifiedTime;
+	 
+ @Column(name="SURVEYNAME")	
+ private String surveyName;
+  @Column(name="SURVEYID")
+  private String surveyId;
+  
+  
+  
+  
+
+
+
+public int getUserSurveyId() {
+	return userSurveyId;
+}
+public void setUserSurveyId(int userSurveyId) {
+	this.userSurveyId = userSurveyId;
+}
+public String getUserName() {
+	return userName;
+}
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+public String getUserId() {
+	return userId;
+}
+public void setUserId(String userId) {
+	this.userId = userId;
+}
+public String getUserScore() {
+	return userScore;
+}
+public void setUserScore(String userScore) {
+	this.userScore = userScore;
+}
+public String getUserData() {
+	return userData;
+}
+public void setUserData(String userData) {
+	this.userData = userData;
+}
+public String getAddonDateTime() {
+	return addonDateTime;
+}
+public void setAddonDateTime(String addonDateTime) {
+	this.addonDateTime = addonDateTime;
+}
+public String getModifiedTime() {
+	return modifiedTime;
+}
+public void setModifiedTime(String modifiedTime) {
+	this.modifiedTime = modifiedTime;
+}
+public String getSurveyName() {
+	return surveyName;
+}
+public void setSurveyName(String surveyName) {
+	this.surveyName = surveyName;
+}
+public String getSurveyId() {
+	return surveyId;
+}
+public void setSurveyId(String surveyId) {
+	this.surveyId = surveyId;
+}
+
+
+
+  
+  
+  
+
+}
+	 

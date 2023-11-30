@@ -1,0 +1,181 @@
+/**
+ * 
+ */
+package com.rms.serviceImpl;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rms.dao.AnswerRepository;
+import com.rms.dao.MstQuestionDataRepository;
+import com.rms.model.AnswerVo;
+import com.rms.model.MstQuestionsVO;
+import com.rms.model.MstSurveyVO;
+import com.rms.service.ImstQuestionsService;
+
+/**
+ * @author shiva.theja
+ * @param <MstQuestionDataRepository>
+ *
+ */
+@Service
+public class MstQuestionsServiceImpl implements ImstQuestionsService {
+
+	
+	@Autowired
+	MstQuestionDataRepository dao;
+	
+	@Autowired
+	AnswerRepository answerdao;
+	
+	/*@Override
+	public MstQuestionsVO createMstQuestions(MstQuestionsVO mstQuestionsVO) {
+		if(mstQuestionsVO.getQuestionTypeFlag().equals("binary")) {
+			mstQuestionsVO.setQuestionTypeFlag("binary");	
+			mstQuestionsVO.setAddedBy("SYS");
+			mstQuestionsVO.setModifiedBy("SYS");
+			return dao.save(mstQuestionsVO);
+			
+		}else if (mstQuestionsVO.getQuestionTypeFlag().equals("range")) {
+			mstQuestionsVO.setQuestionTypeFlag("range");
+			return dao.save(mstQuestionsVO);
+			
+		}else {
+			mstQuestionsVO.setQuestionTypeFlag("custom");
+			return dao.save(mstQuestionsVO);
+		}
+		
+		
+	}*/
+
+	
+ 
+    @Override
+    public MstQuestionsVO createMstQuestions(MstQuestionsVO mstQuestionsVO) {
+    	if(mstQuestionsVO.getQuestionTypeFlag().equals("binary")) {
+    		
+    		MstSurveyVO MstSurveyVO = new MstSurveyVO();
+   		     MstSurveyVO.setSurveyid(1);    		
+    		mstQuestionsVO.setQuestionTypeFlag("binary");	
+			mstQuestionsVO.setAddedBy("SYS");
+			mstQuestionsVO.setModifiedBy("SYS");
+
+			List<AnswerVo> answerList = new ArrayList<>();
+			
+			AnswerVo answer = new AnswerVo();
+			answer.setOptions("yes/No");
+			answer.setMessage("this is option 1");
+			answer.setValue(10);	
+			answer.setMstQuestionsVO(mstQuestionsVO);
+			
+			AnswerVo answer1 = new AnswerVo();
+			answer1.setOptions("yes/No");
+			answer1.setMessage("this is option 2");
+			answer1.setValue(10);	
+			answer1.setMstQuestionsVO(mstQuestionsVO);
+			
+			AnswerVo answer2 = new AnswerVo();
+			answer2.setOptions("yes/No");
+			answer2.setMessage("this is option 3");
+			answer2.setValue(10);	
+			answer2.setMstQuestionsVO(mstQuestionsVO);
+			
+			
+			answerList.add(answer);
+			answerList.add(answer1);
+			answerList.add(answer2);
+			
+			mstQuestionsVO.setAnswer(answerList);
+	        mstQuestionsVO.setSurvey(MstSurveyVO);	
+	        
+			return dao.save(mstQuestionsVO);
+			
+	/*		mstQuestionsVO.setQuestionTypeFlag("binary");	
+			mstQuestionsVO.setAddedBy("SYS");
+			mstQuestionsVO.setModifiedBy("SYS");
+//			MstSurveyVO MstSurveyVO = new MstSurveyVO();
+//			MstSurveyVO.setSurveyid(1);
+			MstSurveyVO MstSurveyVO = new MstSurveyVO();
+			MstSurveyVO.setSurveyid(1);
+//			Set<AnswerVo> answer = new HashSet<>();
+			List<AnswerVo> answe = new ArrayList<>();
+			AnswerVo answer = new AnswerVo();
+			answer.setAnswerid(1);
+			answer.setOption("yes");
+			answer.setValue(10);			
+			answer.setMessage("this is binary");
+			answer.setMstQuestionsVO(mstQuestionsVO);
+			answe.add(answer);
+			mstQuestionsVO.setAnswer(answe);
+			mstQuestionsVO.setSurvey(MstSurveyVO);
+//			answerdao.save(answer);
+
+		
+			return dao.save(mstQuestionsVO);
+			*/
+		}else if (mstQuestionsVO.getQuestionTypeFlag().equals("range")) {
+			mstQuestionsVO.setQuestionTypeFlag("range");
+			mstQuestionsVO.setAddedBy("SYS");
+			mstQuestionsVO.setModifiedBy("SYS");
+//			List<MstSurveyVO> MstSurveyVO = new ArrayList();
+//			MstSurveyVO.get(0).setSurveyid(1);	
+			MstSurveyVO MstSurveyVO = new MstSurveyVO();
+			MstSurveyVO.setSurveyid(1);		
+			mstQuestionsVO.setSurvey(MstSurveyVO);
+			AnswerVo answer = new AnswerVo();
+			answer.setAnswerid(1);
+//			mstQuestionsVO.setAnswer(answer);
+			return dao.save(mstQuestionsVO);
+			
+		}else {
+			mstQuestionsVO.setQuestionTypeFlag("custom");
+			mstQuestionsVO.setAddedBy("SYS");
+			mstQuestionsVO.setModifiedBy("SYS");
+			MstSurveyVO MstSurveyVO = new MstSurveyVO();
+			MstSurveyVO.setSurveyid(1);
+//			mstQuestionsVO.setSurvey(MstSurveyVO);
+//			List<MstSurveyVO> MstSurveyVO = new ArrayList();
+//			MstSurveyVO.get(0).setSurveyid(1);			
+//			mstQuestionsVO.setSurvey( MstSurveyVO);
+//			mstQuestionsVO.setSurvey(MstSurveyVO);
+			return dao.save(mstQuestionsVO);
+		}
+    }
+ 
+    @Override
+    public List<MstQuestionsVO> getmstQuestionsVO(int surveyid) {
+        return dao.findAll();
+    }
+
+	@Override
+	public AnswerVo createMstAnswers(AnswerVo AnswerVo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+	
+	
+	
+	
+	
+/*	@Override
+	public List<MstQuestionsVO> findQuestionAndAnswer(MstQuestionsVO mstQuestionsVO) {
+Optional<MstQuestionsVO> userList = dao.findById(mstQuestionsVO.getQuestionid());*/
+		
+		
+		/*List<MstQuestionsVO> collectToFacility = userList
+													.stream()
+													.map((MstQuestionsVO login)-> new MstQuestionsVO())
+													.collect(Collectors.toList());*/
+//		return (List<MstQuestionsVO>) userList.get();
+//		return dao.findQuestionAndAnswer(mstQuestionsVO);
+	
+
+}

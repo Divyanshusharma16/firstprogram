@@ -1,0 +1,129 @@
+package com.rms.controller;
+
+
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rms.comman.CommonConstants;
+import com.rms.dao.MstQuestionDataRepository;
+import com.rms.dao.SurveyDataRepository;
+import com.rms.model.FacilityVO;
+import com.rms.model.MstPatientDetails;
+import com.rms.model.MstQuestionsVO;
+import com.rms.model.MstSurveyVO;
+import com.rms.model.UserLogin;
+import com.rms.model.UserServeyDetailsModel;
+import com.rms.service.IFacilityService;
+import com.rms.service.IPatientEMRData;
+import com.rms.service.IUserServeyDetalis;
+import com.rms.service.IUserService;
+import com.rms.service.ImstQuestionsService;
+
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+@RestController
+@RequestMapping(CommonConstants.MASTER_URL)
+public class RmsUserController {
+
+	@Autowired
+	IUserService service;
+	
+	@Autowired
+	IFacilityService iFacilityService;
+	
+	@Autowired
+	IPatientEMRData PatientEMRData;
+	@Autowired
+	IUserServeyDetalis iUserServeyDetalis;
+	
+	@Autowired
+	ImstQuestionsService imstQuestionsService;
+	@Autowired
+	MstQuestionDataRepository MstQuestionDataRepository;
+	
+	@Autowired
+	SurveyDataRepository surveyDataRepository;
+	
+	@RequestMapping(value=CommonConstants.LOGIN_REGISTRATION, method= RequestMethod.POST)
+	public UserLogin createUserLogin(@RequestBody UserLogin userLogin) {
+		return service.createUserLogin(userLogin);
+	}
+		
+	@RequestMapping(value=CommonConstants.GET_FACILITY, method= RequestMethod.GET)
+	public List<FacilityVO> getFacility() {
+		return iFacilityService.getFacility();
+	}
+
+	
+	@RequestMapping(value=CommonConstants.GET_LOGIN, method= RequestMethod.POST)
+	public List<UserLogin> findByusernameAnduserpassword(@RequestBody UserLogin userLogin) throws Exception{
+		return service.findByusernameAnduserpassword(userLogin);
+	}
+	
+
+	/*@RequestMapping(value= CommonConstants.SEND_SMS, method= RequestMethod.POST)
+	public boolean sendSmsToUser( @RequestBody SendSmsAndSendEmailVO sendSmsAndSendEmailVO) {
+		return service.sendSmsToUser(sendSmsAndSendEmailVO);
+	}*/
+	//@RequestBody MstPatientDetails mstPatientDetails
+	@RequestMapping(value= CommonConstants.SEND_SMS_AND_EMAIL, method= RequestMethod.POST)
+	public List<MstPatientDetails> sendSmsAndEmailToUser(@PathVariable("checkOutTime") String checkOutTime )throws Exception {
+		MstPatientDetails mstPatientDetails=new MstPatientDetails();
+		mstPatientDetails.setCheckOutTime(checkOutTime);
+		return PatientEMRData.sendSmsAndEmailToUser(mstPatientDetails);
+	}
+	
+	
+	@RequestMapping(value=CommonConstants.USER_SURVEY_DETAILS, method= RequestMethod.POST)
+	public UserServeyDetailsModel userServeyDetail(@RequestBody UserServeyDetailsModel userServeyDetailsModel) {
+		return iUserServeyDetalis.userServeyDetail(userServeyDetailsModel);
+	}
+	
+	
+	
+	@RequestMapping(value=CommonConstants.USER_SURVEY_REPORT, method= RequestMethod.POST)
+	public UserServeyDetailsModel userServeyReport(@RequestBody UserServeyDetailsModel userServeyDetailsModel) {
+		return iUserServeyDetalis.userServeyReport(userServeyDetailsModel);
+	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value=CommonConstants.CREATE_QUESTION, method= RequestMethod.POST)
+	public MstQuestionsVO createMSTQuestions(@RequestBody MstQuestionsVO mstQuestionsVO) {
+		return imstQuestionsService.createMstQuestions(mstQuestionsVO);
+	}
+	
+	
+	@RequestMapping(value=CommonConstants.CREATE_SURVEY, method= RequestMethod.POST)
+	public MstSurveyVO createSurvey(@RequestBody MstSurveyVO MstSurveyVO) {
+		return surveyDataRepository.save(MstSurveyVO);
+	}
+	
+	
+	@RequestMapping(value=CommonConstants.GET_SURVEY_QUESTIONS, method= RequestMethod.GET)
+	public Optional<MstSurveyVO>  getmstSurveyquestions(@PathVariable int id) {
+		 return surveyDataRepository.findById(id);
+	}
+	
+	
+	
+	
+	
+	
+	
+}

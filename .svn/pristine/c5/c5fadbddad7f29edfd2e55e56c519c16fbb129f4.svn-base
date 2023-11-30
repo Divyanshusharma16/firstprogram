@@ -1,0 +1,42 @@
+package com.rms.dao;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.rms.model.MstPatientDetails;
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+@Repository
+
+
+public interface EMRDataRepository extends JpaRepository<MstPatientDetails, Integer> {
+List<MstPatientDetails> findByCheckOutTime(String checkOutTime) throws IOException; 
+
+ @Modifying
+ @Transactional
+  @Query(value = "UPDATE rms.mstpatientdetails set SMSSTATUS =? where PATIENTCELLNO = ?",
+	           nativeQuery = true)
+     public   void updateSMSStatus(String status,String toNumber);
+
+}
+
+	
+
+	
+
+
+
+
+
+	
+	
+

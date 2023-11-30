@@ -1,0 +1,44 @@
+package com.rms.service;
+
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+
+import com.rms.model.SendSmsAndSendEmailVO;
+import com.rms.model.UserLogin;
+import com.rms.model.UserServeyDetailsModel;
+
+
+/**
+ * @author Susheel.Kumar
+ *
+ */
+@Service
+public interface IUserServeyDetalis {
+
+
+	public UserServeyDetailsModel userServeyDetail(UserServeyDetailsModel userServeyDetailsModel);
+
+	public UserServeyDetailsModel userServeyReport(UserServeyDetailsModel userServeyDetailsModel);
+
+
+
+	
+
+	
+	
+
+
+
+
+
+	
+	
+	
+	
+
+
+	
+	
+
+}

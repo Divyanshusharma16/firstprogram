@@ -1,0 +1,22 @@
+package com.rms.service;
+
+import java.util.List;
+
+import com.rms.model.FacilityVO;
+/**
+ * @author Susheel.Kumar
+ *
+ */
+
+public interface IFacilityService {
+
+	public List<FacilityVO> getFacility();
+	
+	
+	
+
+
+	
+	
+
+}

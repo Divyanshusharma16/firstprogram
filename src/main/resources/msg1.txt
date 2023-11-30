@@ -1,0 +1,6 @@
+<html>
+<body>
+Hi Susheel ,
+<p>Please start sending http links in the email now to check how will the services for <a href='@Link@'>@LinkLable@" </a>, "Not Interested " and "Take Survey" work.</p>
+</body>
+</html>

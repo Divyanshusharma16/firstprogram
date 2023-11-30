@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package com.rms.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.rms.model.MstQuestionsVO;
+import com.rms.model.MstSurveyVO;
+
+
+
+/**
+ * @author shiva.theja
+ *
+ */
+@Repository
+public interface SurveyDataRepository extends JpaRepository<MstSurveyVO, Integer>{
+
+	List<MstSurveyVO> findBySurveyid(@Param("surveyid") int surveyid);
+	
+}
